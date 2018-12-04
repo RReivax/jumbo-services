@@ -1,0 +1,25 @@
+---
+- name: Template hostgroups
+  template: 
+    src: hostgroups.j2
+    dest: /tmp/hostgroups.json
+
+- name: Load Blueprint and hostgroups
+  set_fact:
+    bp_var: "{{ lookup('file', '/tmp/blueprint.json') | from_json }}"
+    hg_var: "{{ lookup('file', '/tmp/hostgroups.json') | from_json }}"
+
+- name: Add Blueprint hostgroups to Blueprint
+  set_fact:
+    bp_var: "{{ bp_var | combine(hg_var) }}"
+
+- name: debug
+  debug:
+    msg: "{{ bp_var }}"
+
+- pause:
+
+- name: Update blueprint
+  copy:
+    content: "{{ bp_var }}"
+    dest: /tmp/blueprint.json
