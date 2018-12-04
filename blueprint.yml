@@ -1,0 +1,9 @@
+---
+## Example blueprint playbook
+- hosts: localhost
+  roles:
+    # First copy clean blueprint to /tmp/blueprint.json and register handlers
+    - build-blueprint 
+    # Then complete blueprint by calling required roles
+    - blueprint-hdfs
+    - blueprint-yarn
