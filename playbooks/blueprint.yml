@@ -1,6 +1,6 @@
 ---
 ## Example blueprint playbook
-- hosts: localhost
+- hosts: ambariserver
   roles:
     # Copy clean blueprint to /tmp/blueprint.json 
     # Generate hostgroups with components
@@ -11,3 +11,5 @@
     - { role: blueprint-yarn, when: YARN is defined }
     - { role: blueprint-hive, when: HIVE is defined }
     - { role: blueprint-zookeeper, when: ZOOKEEPER is defined }
+    # Post blueprint to Ambari API
+      - postblueprint

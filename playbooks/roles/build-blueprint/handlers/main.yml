@@ -13,10 +13,22 @@
     dest: "/tmp/blueprint_conf.json"
   listen: "add service to blueprint"
 
-- name: Load Blueprint and Configuration
-  set_fact:
-    bp_var: "{{ lookup('file', '/tmp/blueprint.json') | from_json }}"
-    bpconf_var: "{{ lookup('file', '/tmp/blueprint_conf.json') | from_json }}"
+- name: Load Blueprint file
+  slurp:
+    path: '/tmp/blueprint.json'
+  register: bp_var_file
+  listen: "add service to blueprint"
+
+- name: Load service configuration file
+  slurp:
+    path: '/tmp/blueprint_conf.json'
+  register: bpconf_var_file
+  listen: "add service to blueprint"
+
+- name: Register as JSON variables
+  set_fact: 
+    bp_var: "{{ bp_var_file.content|b64decode|from_json }}"
+    bpconf_var: "{{ bpconf_var_file.content|b64decode|from_json }}"
   listen: "add service to blueprint"
 
 - name: Merge configurations
@@ -34,9 +46,6 @@
   debug:
     msg: "{{ bp_var }}"
   listen: "add service to blueprint"
-
-# - pause:
-#   listen: "add service to blueprint"
 
 - name: Update blueprint
   copy:
