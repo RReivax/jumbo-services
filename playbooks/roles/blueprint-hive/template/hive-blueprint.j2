@@ -4,7 +4,7 @@
     {
       "core-site": {
         "properties": {
-          "hadoop.proxyuser.hive.hosts": "{{ HIVE.metastore_FQDN }}",
+          "hadoop.proxyuser.hive.hosts": "{{ HIVE.metastores_FQDN[0] }}",
           "hadoop.proxyuser.hcat.hosts": "{{ HIVE.webhcat_FQDN }}"
         }
       }
