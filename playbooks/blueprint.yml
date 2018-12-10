@@ -9,3 +9,4 @@
     # Complete blueprint configurations by calling required roles
     - blueprint-hdfs
     - blueprint-yarn
+    - blueprint-hive
