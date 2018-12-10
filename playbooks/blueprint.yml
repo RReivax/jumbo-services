@@ -7,7 +7,7 @@
     # Register handlers
     - build-blueprint 
     # Complete blueprint configurations by calling required roles
-    - blueprint-hdfs
-    - blueprint-yarn
-    - blueprint-hive
-    - blueprint-zookeeper
+    - { role: blueprint-hdfs, when: HIVE is defined }
+    - { role: blueprint-yarn, when: YARN is defined }
+    - { role: blueprint-hive, when: HIVE is defined }
+    - { role: blueprint-zookeeper, when: ZOOKEEPER is defined }
