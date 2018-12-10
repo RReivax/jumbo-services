@@ -10,3 +10,4 @@
     - blueprint-hdfs
     - blueprint-yarn
     - blueprint-hive
+    - blueprint-zookeeper
